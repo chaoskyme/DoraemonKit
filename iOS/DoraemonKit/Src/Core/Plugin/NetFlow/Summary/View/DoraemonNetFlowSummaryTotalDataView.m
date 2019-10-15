@@ -68,6 +68,7 @@
 
 - (void)initUI{
     self.layer.cornerRadius = 5.f;
+#ifdef __IPHONE_13_0
     if (@available(iOS 13.0, *)) {
         self.backgroundColor = [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
             if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
@@ -79,6 +80,9 @@
     } else {
        self.backgroundColor = [UIColor whiteColor];
     }
+#else
+    self.backgroundColor = [UIColor whiteColor];
+#endif
      
     //抓包时间
     NSString *time;

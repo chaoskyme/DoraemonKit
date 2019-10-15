@@ -14,6 +14,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+#ifdef __IPHONE_13_0
         if (@available(iOS 13.0, *)) {
             self.backgroundColor = [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
                 if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
@@ -25,6 +26,9 @@
         } else {
             self.backgroundColor = [UIColor whiteColor];
         }
+#else
+        self.backgroundColor = [UIColor whiteColor];
+#endif
         
         self.xAxis = [[DoraemonXAxis alloc] init];
         self.yAxis = [[DoraemonYAxis alloc] init];
@@ -100,9 +104,11 @@
         CGFloat y = self.contentInset.top + self.yAxis.marginTop + spacing * i;
         NSString *text = labels[i];
         UIColor *attColor = [UIColor blackColor];
+#ifdef __IPHONE_13_0
         if (@available(iOS 13.0, *)) {
             attColor = [UIColor labelColor];
         }
+#endif
         NSDictionary *attributes = @{NSFontAttributeName: self.yAxis.axisLabelFont, NSForegroundColorAttributeName: attColor};
         CGSize size = [text sizeWithAttributes:attributes];
         
@@ -134,9 +140,11 @@
         
         NSString *value = [self.vauleFormatter stringFromNumber: [NSNumber numberWithDouble:item.value]];
         UIColor *attColor = [UIColor blackColor];
+#ifdef __IPHONE_13_0
         if (@available(iOS 13.0, *)) {
             attColor = [UIColor labelColor];
         }
+#endif
         NSDictionary *attributes = @{NSFontAttributeName: self.yAxis.axisLabelFont, NSForegroundColorAttributeName: attColor};
         CGSize valueLabelSize = [value sizeWithAttributes:attributes];
         CGFloat valueLabelOffSetX = (barWidth - valueLabelSize.width) / 2;

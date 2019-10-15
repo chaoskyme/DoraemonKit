@@ -24,6 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+#ifdef __IPHONE_13_0
     if (@available(iOS 13.0, *)) {
         self.view.backgroundColor = [UIColor systemBackgroundColor];
         [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor labelColor]}];
@@ -33,6 +34,9 @@
     } else {
         self.view.backgroundColor = [UIColor whiteColor];
     }
+#else
+    self.view.backgroundColor = [UIColor whiteColor];
+#endif
      
     if ([self needBigTitleView]) {
         if ([DoraemonStateBar shareInstance].hidden) {
@@ -44,11 +48,13 @@
         [self.view addSubview:_bigTitleView];
     } else {
         UIImage *image = [UIImage doraemon_imageNamed:@"doraemon_back"];
+#ifdef __IPHONE_13_0
         if (@available(iOS 13.0, *)) {
             if (UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
                 image = [UIImage doraemon_imageNamed:@"doraemon_back_dark"];
             }
         }
+#endif
         self.leftModel = [[DoraemonNavBarItemModel alloc] initWithImage:image selector:@selector(leftNavBackClick:)];
         [self setLeftNavBarItems:@[self.leftModel]];
     }
@@ -74,6 +80,7 @@
     [super traitCollectionDidChange:previousTraitCollection];
     
     // trait发生了改变
+#ifdef __IPHONE_13_0
     if (@available(iOS 13.0, *)) {
         if ([self.traitCollection hasDifferentColorAppearanceComparedToTraitCollection:previousTraitCollection]) {
             if (UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
@@ -84,6 +91,7 @@
             }
         }
     }
+#endif
 }
 
 //是否需要大标题，默认不需要

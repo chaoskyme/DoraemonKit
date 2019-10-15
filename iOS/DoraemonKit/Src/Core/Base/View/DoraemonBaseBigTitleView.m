@@ -25,9 +25,11 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
+#ifdef __IPHONE_13_0
         if (@available(iOS 13.0, *)) {
             self.backgroundColor = [UIColor systemBackgroundColor];
         }
+#endif
         
         CGFloat offsetY = 0;
         if (![DoraemonStateBar shareInstance].hidden) {
@@ -39,6 +41,7 @@
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(kDoraemonSizeFrom750_Landscape(32), titleLabelOffsetY, self.doraemon_width-kDoraemonSizeFrom750_Landscape(32)-closeBtnH, kDoraemonSizeFrom750_Landscape(67))];
         
         UIImage *closeImage = [UIImage doraemon_imageNamed:@"doraemon_close"];
+#ifdef __IPHONE_13_0
         if (@available(iOS 13.0, *)) {
             _titleLabel.textColor = [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
                 if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
@@ -53,6 +56,9 @@
         } else {
             _titleLabel.textColor = [UIColor doraemon_colorWithString:@"#324456"];
         }
+#else
+        _titleLabel.textColor = [UIColor doraemon_colorWithString:@"#324456"];
+#endif
         
         _titleLabel.font = [UIFont systemFontOfSize:kDoraemonSizeFrom750_Landscape(48)];
         [self addSubview:_titleLabel];
@@ -74,6 +80,7 @@
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
     [super traitCollectionDidChange:previousTraitCollection];
     
+#ifdef __IPHONE_13_0
     // trait发生了改变
     if (@available(iOS 13.0, *)) {
         if ([self.traitCollection hasDifferentColorAppearanceComparedToTraitCollection:previousTraitCollection]) {
@@ -84,6 +91,7 @@
             }
         }
     }
+#endif
 }
 
 - (void)setTitle:(NSString *)title{

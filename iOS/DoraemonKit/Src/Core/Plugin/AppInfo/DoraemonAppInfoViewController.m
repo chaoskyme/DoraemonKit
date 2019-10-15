@@ -51,11 +51,15 @@
     self.title = DoraemonLocalizedString(@"App基本信息");
 
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.bigTitleView.doraemon_bottom, self.view.doraemon_width, self.view.doraemon_height-self.bigTitleView.doraemon_bottom) style:UITableViewStyleGrouped];
+#ifdef __IPHONE_13_0
     if (@available(iOS 13.0, *)) {
         self.tableView.backgroundColor = [UIColor systemBackgroundColor];
     } else {
         self.tableView.backgroundColor = [UIColor whiteColor];
     }
+#else
+    self.tableView.backgroundColor = [UIColor whiteColor];
+#endif
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.estimatedRowHeight = 0.;

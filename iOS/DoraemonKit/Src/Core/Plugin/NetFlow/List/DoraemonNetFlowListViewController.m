@@ -29,6 +29,7 @@
     
     self.title = DoraemonLocalizedString(@"流量监控列表");
     
+#ifdef __IPHONE_13_0
     if (@available(iOS 13.0, *)) {
         self.view.backgroundColor = [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
             if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
@@ -40,6 +41,9 @@
     } else {
         self.view.backgroundColor = [UIColor whiteColor];
     }
+#else
+    self.view.backgroundColor = [UIColor whiteColor];
+#endif
     
     NSArray *dataArray = [DoraemonNetFlowDataSource shareInstance].httpModelArray;
     _dataArray = [NSArray arrayWithArray:dataArray];

@@ -62,6 +62,7 @@
     _textView.layer.borderColor = [UIColor grayColor].CGColor;
     _textView.layer.borderWidth = 2.0f;
     _textView.text = text;
+#ifdef __IPHONE_13_0
     if (@available(iOS 13.0, *)) {
         _textView.textColor = [UIColor labelColor];
         _textView.backgroundColor = [UIColor systemBackgroundColor];
@@ -69,6 +70,10 @@
         _textView.textColor = [UIColor blackColor];
         _textView.backgroundColor = [UIColor whiteColor];
     }
+#else
+    _textView.textColor = [UIColor blackColor];
+    _textView.backgroundColor = [UIColor whiteColor];
+#endif
     [self.view addSubview:_textView];
 }
 

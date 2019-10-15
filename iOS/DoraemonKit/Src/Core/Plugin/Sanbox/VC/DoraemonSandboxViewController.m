@@ -40,6 +40,7 @@
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
     [super traitCollectionDidChange:previousTraitCollection];
     
+#ifdef __IPHONE_13_0
     // trait发生了改变
     if (@available(iOS 13.0, *)) {
         if ([self.traitCollection hasDifferentColorAppearanceComparedToTraitCollection:previousTraitCollection]) {
@@ -50,6 +51,7 @@
             }
         }
     }
+#endif
 }
 
 - (BOOL)needBigTitleView{
@@ -92,11 +94,13 @@
         NSString *dirTitle =  [fm displayNameAtPath:targetPath];
         self.title = dirTitle;
         UIImage *image = [UIImage doraemon_imageNamed:@"doraemon_back"];
-        if (@available(iOS 13.0, *)) { 
+#ifdef __IPHONE_13_0
+        if (@available(iOS 13.0, *)) {
             if (UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
                 image = [UIImage doraemon_imageNamed:@"doraemon_back_dark"];
             }
         }
+#endif
         self.leftModel = [[DoraemonNavBarItemModel alloc] initWithImage:image selector:@selector(leftNavBackClick:)];
         
         [self setLeftNavBarItems:@[self.leftModel]];

@@ -62,6 +62,7 @@
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
     [super traitCollectionDidChange:previousTraitCollection];
     
+#ifdef __IPHONE_13_0
     // trait发生了改变
     if (@available(iOS 13.0, *)) {
         if ([self.traitCollection hasDifferentColorAppearanceComparedToTraitCollection:previousTraitCollection]) {
@@ -72,6 +73,8 @@
             }
         }
     }
+#endif
+    
 }
 
 #pragma mark -- DoraemonSwitchViewDelegate
@@ -99,6 +102,7 @@
 
 - (void)showNetFlowDetail{
     UITabBarController *tabBar = [[UITabBarController alloc] init];
+#ifdef __IPHONE_13_0
     if (@available(iOS 13.0, *)) {
         tabBar.tabBar.backgroundColor = [UIColor systemBackgroundColor];
         if (UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
@@ -109,6 +113,9 @@
     } else {
         tabBar.tabBar.backgroundColor = [UIColor whiteColor];
     }
+#else
+    tabBar.tabBar.backgroundColor = [UIColor whiteColor];
+#endif
     _tabBar = tabBar;
     
     UIViewController *vc1 = [[DoraemonNetFlowSummaryViewController alloc] init];

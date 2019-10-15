@@ -116,6 +116,7 @@ CGFloat doraemonColorComponentFrom(NSString *string, NSUInteger start, NSUIntege
 }
 
 + (UIColor *)doraemon_black_1 { // #333333
+#ifdef __IPHONE_13_0
     if (@available(iOS 13.0, *)) {
         return [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
             if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
@@ -127,9 +128,13 @@ CGFloat doraemonColorComponentFrom(NSString *string, NSUInteger start, NSUIntege
     } else {
         return [UIColor doraemon_colorWithString:@"#333333"];
     }
+#else
+    return [UIColor doraemon_colorWithString:@"#333333"];
+#endif
 }
 
 + (UIColor *)doraemon_black_2 {  // #666666
+#ifdef __IPHONE_13_0
     if (@available(iOS 13.0, *)) {
         return [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
             if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
@@ -141,9 +146,14 @@ CGFloat doraemonColorComponentFrom(NSString *string, NSUInteger start, NSUIntege
     } else {
         return [UIColor doraemon_colorWithString:@"#666666"];
     }
+#else
+    return [UIColor doraemon_colorWithString:@"#666666"];
+#endif
+    
 }
 
 + (UIColor *)doraemon_black_3 {  // #999999
+#ifdef __IPHONE_13_0
     if (@available(iOS 13.0, *)) {
         return [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
             if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
@@ -155,9 +165,14 @@ CGFloat doraemonColorComponentFrom(NSString *string, NSUInteger start, NSUIntege
     } else {
         return [UIColor doraemon_colorWithString:@"#999999"];
     }
+#else
+    return [UIColor doraemon_colorWithString:@"#999999"];
+#endif
+    
 }
 
 + (UIColor *)doraemon_blue { // #337CC4
+#ifdef __IPHONE_13_0
     if (@available(iOS 13.0, *)) {
         return [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
             if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
@@ -169,6 +184,9 @@ CGFloat doraemonColorComponentFrom(NSString *string, NSUInteger start, NSUIntege
     } else {
         return [UIColor doraemon_colorWithString:@"#337CC4"];
     }
+#else
+    return [UIColor doraemon_colorWithString:@"#337CC4"];
+#endif
 }
 
 + (UIColor *)doraemon_bg{ // #F4F5F6
@@ -176,6 +194,7 @@ CGFloat doraemonColorComponentFrom(NSString *string, NSUInteger start, NSUIntege
 }
 
 + (UIColor *)doraemon_line {
+#ifdef __IPHONE_13_0
     if (@available(iOS 13.0, *)) {
         return [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
             if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
@@ -187,6 +206,10 @@ CGFloat doraemonColorComponentFrom(NSString *string, NSUInteger start, NSUIntege
     } else {
         return [UIColor doraemon_colorWithHex:0x000000 andAlpha:0.1];
     }
+#else
+    return [UIColor doraemon_colorWithHex:0x000000 andAlpha:0.1];
+#endif
+    
 }
 
 + (UIColor *)doraemon_randomColor {

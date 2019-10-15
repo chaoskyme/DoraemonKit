@@ -23,6 +23,7 @@
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
     [super traitCollectionDidChange:previousTraitCollection];
     
+#ifdef __IPHONE_13_0
     // trait发生了改变
     if (@available(iOS 13.0, *)) {
         if ([self.traitCollection hasDifferentColorAppearanceComparedToTraitCollection:previousTraitCollection]) {
@@ -33,9 +34,12 @@
             }
         }
     }
+#endif
+    
 }
 
 - (void)initUI {
+#ifdef __IPHONE_13_0
     if (@available(iOS 13.0, *)) {
         self.view.backgroundColor = [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
             if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
@@ -45,6 +49,7 @@
             }
         }];
     }
+#endif
     
     // 视图加载完成之前拿不到当前window，所以这里等待 UI 线程执行完成 
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -55,11 +60,13 @@
         self.closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(viewSize.width - closeWidth - kDoraemonSizeFrom750_Landscape(16), kDoraemonSizeFrom750_Landscape(16), closeWidth, closeHeight)];
         
         UIImage *closeImage = [UIImage doraemon_imageNamed:@"doraemon_close"];
-        if (@available(iOS 13.0, *)) { 
+#ifdef __IPHONE_13_0
+        if (@available(iOS 13.0, *)) {
             if (UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
                 closeImage = [UIImage doraemon_imageNamed:@"doraemon_close_dark"];
             }
         }
+#endif
         
         [self.closeBtn setBackgroundImage:closeImage forState:UIControlStateNormal];
         [self.closeBtn addTarget:self action:@selector(closeBtnClicked:) forControlEvents:UIControlEventTouchUpInside];

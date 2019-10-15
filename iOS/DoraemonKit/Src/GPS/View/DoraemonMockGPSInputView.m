@@ -45,12 +45,15 @@
         _exampleLabel.font = [UIFont systemFontOfSize:kDoraemonSizeFrom750_Landscape(24)];
         _exampleLabel.text = DoraemonLocalizedString(@"(示例: 120.15 30.28)");
         [self addSubview:_exampleLabel];
-        
+#ifdef __IPHONE_13_0
         if (@available(iOS 13.0, *)) {
             self.backgroundColor = [UIColor systemBackgroundColor];
         } else {
             self.backgroundColor = [UIColor whiteColor];
         }
+#else
+        self.backgroundColor = [UIColor whiteColor];
+#endif
         
     }
     return self;

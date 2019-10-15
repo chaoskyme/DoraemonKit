@@ -23,11 +23,15 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+#ifdef __IPHONE_13_0
         if (@available(iOS 13.0, *)) {
             self.backgroundColor = [UIColor systemBackgroundColor];
         } else {
             self.backgroundColor = [UIColor whiteColor];
         }
+#else
+        self.backgroundColor = [UIColor whiteColor];
+#endif
         
         self.titleLabel = [[UILabel alloc] init];
         self.titleLabel.textColor = [UIColor doraemon_black_1];

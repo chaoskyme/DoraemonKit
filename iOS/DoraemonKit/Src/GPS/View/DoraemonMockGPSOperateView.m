@@ -19,11 +19,15 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
+#ifdef __IPHONE_13_0
         if (@available(iOS 13.0, *)) {
             self.backgroundColor = [UIColor systemBackgroundColor];
         } else {
             self.backgroundColor = [UIColor whiteColor];
         }
+#else
+        self.backgroundColor = [UIColor whiteColor];
+#endif
         self.layer.cornerRadius = kDoraemonSizeFrom750_Landscape(8);
         
         _titleLabel = [[UILabel alloc] init];

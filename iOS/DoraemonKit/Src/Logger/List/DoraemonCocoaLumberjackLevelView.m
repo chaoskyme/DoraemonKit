@@ -22,11 +22,16 @@
         NSArray *dataArray = @[@"Verbose",@"Debug",@"Info",@"Warn",@"Error"];
         _segment = [[UISegmentedControl alloc] initWithItems:dataArray];
         _segment.frame = CGRectMake(kDoraemonSizeFrom750_Landscape(32), self.doraemon_height/2-kDoraemonSizeFrom750_Landscape(68)/2, self.doraemon_width-kDoraemonSizeFrom750_Landscape(32)*2, kDoraemonSizeFrom750_Landscape(68));
+#ifdef __IPHONE_13_0
         if (@available(iOS 13, *)) {
            _segment.selectedSegmentTintColor = [UIColor doraemon_colorWithString:@"#337CC4"];
         } else {
             _segment.tintColor = [UIColor doraemon_colorWithString:@"#337CC4"];
         }
+#else
+        _segment.tintColor = [UIColor doraemon_colorWithString:@"#337CC4"];
+#endif
+        
         [_segment setSelectedSegmentIndex:0];
         [_segment addTarget:self action:@selector(segmentChange:) forControlEvents:UIControlEventValueChanged];
         [self addSubview:_segment];

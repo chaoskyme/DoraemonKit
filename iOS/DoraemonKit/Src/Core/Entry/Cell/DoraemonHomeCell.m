@@ -33,9 +33,11 @@
         _name.textAlignment = NSTextAlignmentCenter;
         _name.font = [UIFont systemFontOfSize:kDoraemonSizeFrom750_Landscape(24)];
         _name.adjustsFontSizeToFitWidth = YES;
+#ifdef __IPHONE_13_0
         if (@available(iOS 13.0, *)) {
             _name.textColor = [UIColor labelColor];
         }
+#endif
     }
     
     return _name;
@@ -44,11 +46,15 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+#ifdef __IPHONE_13_0
         if (@available(iOS 13.0, *)) {
             self.backgroundColor = [UIColor systemBackgroundColor];
         } else {
             self.backgroundColor = [UIColor whiteColor];
-        } 
+        }
+#else
+        self.backgroundColor = [UIColor whiteColor];
+#endif
         [self addSubview:self.icon];
         [self addSubview:self.name];
     }

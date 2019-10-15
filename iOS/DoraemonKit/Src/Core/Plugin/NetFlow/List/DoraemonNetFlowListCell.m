@@ -66,6 +66,7 @@ static CGFloat const kFontSize = 10;
         self.flowLabel.font = [UIFont systemFontOfSize:kFontSize];
         [self.contentView addSubview:self.flowLabel];
         
+#ifdef __IPHONE_13_0
         if (@available(iOS 13.0, *)) {
             self.urlLabel.textColor = [UIColor labelColor];
             self.statusLabel.textColor = [UIColor labelColor];
@@ -79,6 +80,14 @@ static CGFloat const kFontSize = 10;
             self.timeLabel.textColor = [UIColor blackColor];
             self.flowLabel.textColor = [UIColor blackColor];
         }
+#else
+        self.urlLabel.textColor = [UIColor blackColor];
+        self.statusLabel.textColor = [UIColor blackColor];
+        self.startTimeLabel.textColor = [UIColor blackColor];
+        self.timeLabel.textColor = [UIColor blackColor];
+        self.flowLabel.textColor = [UIColor blackColor];
+#endif
+        
     }
     return self;
 }

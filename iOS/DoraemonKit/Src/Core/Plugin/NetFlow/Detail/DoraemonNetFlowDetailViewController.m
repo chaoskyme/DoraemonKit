@@ -34,6 +34,7 @@ typedef NS_ENUM(NSUInteger, NetFlowSelectState) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+#ifdef __IPHONE_13_0
     if (@available(iOS 13.0, *)) {
         self.view.backgroundColor = [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
             if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
@@ -45,6 +46,9 @@ typedef NS_ENUM(NSUInteger, NetFlowSelectState) {
     } else {
         self.view.backgroundColor = [UIColor doraemon_colorWithHex:0xeff0f4];
     }
+#else
+    self.view.backgroundColor = [UIColor doraemon_colorWithHex:0xeff0f4];
+#endif
     
     [self initData];
     
@@ -217,6 +221,7 @@ typedef NS_ENUM(NSUInteger, NetFlowSelectState) {
     [view addSubview:tipLabel];
     //tipLabel.backgroundColor = [UIColor doraemon_colorWithHex:0xeff0f4];
     
+#ifdef __IPHONE_13_0
     if (@available(iOS 13.0, *)) {
         view.backgroundColor =  [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
             if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
@@ -226,6 +231,7 @@ typedef NS_ENUM(NSUInteger, NetFlowSelectState) {
             }
         }];
     }
+#endif
     
     return view;
 }
